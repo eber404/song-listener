@@ -1,9 +1,13 @@
 import puppeteer from 'puppeteer'
 
-import { PLAY_PAUSE_SELECTOR } from '@/consts.js'
+import {
+  PLAY_PAUSE_SELECTOR,
+  REMOTE_BROWSER_URI,
+  MUSIC_PROVIDER_URI,
+} from '@/consts.js'
 
-export async function browserHandler({ browserUrl, musicProviderUri }) {
-  const res = await fetch(browserUrl)
+export async function browserHandler() {
+  const res = await fetch(REMOTE_BROWSER_URI)
   const data = await res.json()
   const { webSocketDebuggerUrl } = data
 
@@ -14,7 +18,7 @@ export async function browserHandler({ browserUrl, musicProviderUri }) {
 
   const page = await browser.newPage()
 
-  await page.goto(musicProviderUri)
+  await page.goto(MUSIC_PROVIDER_URI)
   await page.waitForSelector(PLAY_PAUSE_SELECTOR)
   await page.click(PLAY_PAUSE_SELECTOR)
 

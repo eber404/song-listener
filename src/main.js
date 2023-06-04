@@ -1,20 +1,11 @@
-import {
-  SONG_SELECTOR,
-  THUMB_SELECTOR,
-  ARTIST_SELECTOR,
-  MUSIC_PROVIDER_URI,
-  REMOTE_BROWSER_URI,
-} from '@/consts.js'
+import { SONG_SELECTOR, THUMB_SELECTOR, ARTIST_SELECTOR } from '@/consts.js'
 import { listenSelector, writeSongInfo, downloadThumb } from '@/utils.ts'
 import { browserHandler } from '@/browserHandler.js'
 
 async function main() {
   try {
     console.log('Connecting to browser...')
-    const { page } = await browserHandler({
-      browserUrl: REMOTE_BROWSER_URI,
-      musicProviderUri: MUSIC_PROVIDER_URI,
-    })
+    const { page } = await browserHandler()
 
     const songInfo = {
       artist: null,
