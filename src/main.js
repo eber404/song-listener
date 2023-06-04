@@ -1,11 +1,15 @@
 import { SONG_SELECTOR, THUMB_SELECTOR, ARTIST_SELECTOR } from '@/consts.js'
-import { listenSelector, writeSongInfo, downloadThumb } from '@/utils.ts'
-import { browserHandler } from '@/browserHandler.js'
+import {
+  listenSelector,
+  writeSongInfo,
+  downloadThumb,
+  playMusic,
+} from '@/services.ts'
 
 async function main() {
   try {
     console.log('Connecting to browser...')
-    const { page } = await browserHandler()
+    const { page } = await playMusic()
 
     const songInfo = {
       artist: null,
