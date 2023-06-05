@@ -1,0 +1,8 @@
+FROM denoland/deno:1.28.0
+
+WORKDIR /app
+COPY . .
+
+RUN deno task build
+
+CMD [ "./out/build" ]

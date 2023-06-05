@@ -1,0 +1,5 @@
+services:
+  song-info-listener:
+    build: .
+    image:  song-info-listener/dev
+    container_name: song-info-listener

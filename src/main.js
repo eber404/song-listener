@@ -21,6 +21,7 @@ async function main() {
       set: (target, prop, value) => {
         target[prop] = value
 
+        // todo verificar se isso nao ta amarrando o role
         if (!!target.title && !!target.artist && !!target.thumb) {
           writeSongInfo({ title: target.title, artist: target.artist })
           downloadThumb(target.thumb)
