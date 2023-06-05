@@ -4,8 +4,9 @@ import {
   PLAY_PAUSE_SELECTOR,
   REMOTE_BROWSER_URI,
   MUSIC_PROVIDER_URI,
-  SONG_INFO_PATH,
   THUMB_PATH,
+  ARTIST_PATH,
+  TITLE_PATH,
 } from '@/consts.js'
 
 export async function playMusic() {
@@ -61,16 +62,21 @@ export async function downloadThumb(url: string) {
   await Deno.writeFile(THUMB_PATH, new Uint8Array(thumb))
 }
 
-interface WriteSongInfoProps {
-  artist: string
-  title: string
-}
-
-export async function writeSongInfo({ artist, title }: WriteSongInfoProps) {
-  const content = `${artist} - ${title}`
+export async function writeSongArtist(artist: string) {
+  const content = `${artist}`
   const encoder = new TextEncoder()
   const data = encoder.encode(content)
 
-  console.log('Writing song info to file...')
-  await Deno.writeFile(SONG_INFO_PATH, data)
+  console.log('Writing song artits to file...')
+  await Deno.writeFile(ARTIST_PATH, data)
+}
+
+export async function writeSongTitle(title: string) {
+  console.log('escrevendo a porra do title =>', title)
+  const content = `${title}`
+  const encoder = new TextEncoder()
+  const data = encoder.encode(content)
+
+  console.log('Writing song title to file...')
+  await Deno.writeFile(TITLE_PATH, data)
 }

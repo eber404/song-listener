@@ -1,7 +1,19 @@
 {
   "tasks": {
-    "dev": "deno run -A src/main.js",
-    "watch": "deno run --watch -A src/main.js"
+    "dev": "deno run -A --watch src/main.js",
+    "test": "deno test -A tests",
+    "test:watch": "deno test -A --watch tests",
+    "build": "deno compile --output out/build src/main.js --allow-all --config deno.json",
+    "clean:build": "rm -rf build"
   },
-  "importMap": "./import_map.json"
+  "importMap": "import_map.json",
+  "test": {
+    "files": {
+      "exclude": ["src"],
+      "include": ["tests"]
+    }
+  },
+  "compilerOptions": {
+    "strict": true
+  }
 }

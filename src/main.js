@@ -1,9 +1,11 @@
+// deno-lint-ignore-file
 import { SONG_SELECTOR, THUMB_SELECTOR, ARTIST_SELECTOR } from '@/consts.js'
 import {
   listenSelector,
-  writeSongInfo,
   downloadThumb,
   playMusic,
+  writeSongTitle,
+  writeSongArtist,
 } from '@/services.ts'
 
 async function main() {
@@ -21,14 +23,16 @@ async function main() {
       set: (target, prop, value) => {
         target[prop] = value
 
-        // todo verificar se isso nao ta amarrando o role
-        if (!!target.title && !!target.artist && !!target.thumb) {
-          writeSongInfo({ title: target.title, artist: target.artist })
-          downloadThumb(target.thumb)
+        if (!!target.title) {
+          writeSongTitle(target.title)
+        }
 
-          songInfo.song = null
-          songInfo.artist = null
-          songInfo.thumb = null
+        if (!!target.artist) {
+          writeSongArtist(target.artist)
+        }
+
+        if (!!target.thumb) {
+          downloadThumb(target.thumb)
         }
 
         return value
